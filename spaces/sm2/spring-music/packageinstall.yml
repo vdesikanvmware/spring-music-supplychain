@@ -10,7 +10,7 @@ spec:
   packageRef:
     refName: spring-music.apps.local
     versionSelection:
-      constraints: 20250130.915.35573
+      constraints: 20250131.837.40802
   serviceAccountName: carvel-package-installer
   values:
   - secretRef:
