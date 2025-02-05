@@ -8,18 +8,18 @@ metadata:
   name: spring-music
 spec:
   content:
-    buildTimestamp: "2025-01-31T08:37:40Z"
-    gitCommit: e8ba88ce62679251903d256a19d629cb0c32ccd3
+    buildTimestamp: "2025-01-31T09:26:36Z"
+    gitCommit: 6b8a4cc5437a89b899168c4f1acb40d59c641812
     gitRef: sc-build
     gitURL: github.com/vdesikanvmware/spring-music.git
-    packageImage: ttl.sh/ci/containerapp-spring-music@sha256:c9e0ad91cbbfc5ecafab66c1c9678c24f7eb934b0155b8b9222b8575130a7661
+    packageImage: ttl.sh/ci/containerapp-spring-music@sha256:e1d241e77c457214998642502012e0bdc82caedb396ecdd24b9ece240534551c
     packageRefName: spring-music.apps.local
-    packageVersion: 20250131.837.40802
-    summary: git:e8ba88c @ 2025-01-31T08:37:40Z
-    version: 20250131.837.40802
+    packageVersion: 20250131.926.36315
+    summary: git:6b8a4cc @ 2025-01-31T09:26:36Z
+    version: 20250131.926.36315
   health:
     maxUnavailableReplicas: 10%
-  image: ttl.sh/ci/containerapp-spring-music:20250131.837.40802@sha256:2a22f9a92fd2c86c2831db2f0751e939c7cee79407a5808ac19b2c561044a31a
+  image: ttl.sh/ci/containerapp-spring-music:20250131.926.36315@sha256:6f11b1547b00ebd9b61b51a08e6ae40e2bcbab7a6d57374e9a278aaa9ce3ef3d
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.endpoints.web.exposure.include=health,info
@@ -27,6 +27,10 @@ spec:
       -Dmanagement.info.git.enabled=true -Dmanagement.info.java.enabled=true -Dmanagement.info.os.enabled=true
       -Dmanagement.info.process.enabled=true -Dmanagement.server.port=8081 -Dserver.port=8080
       -Dserver.shutdown.grace-period=24s
+  - name: BPL_DEBUG_ENABLED
+    value: "true"
+  - name: BPL_DEBUG_PORT
+    value: "9005"
   ports:
   - name: main
     port: 8080
@@ -37,11 +41,15 @@ spec:
         path: /livez
         port: 8080
         scheme: HTTP
+      periodSeconds: 60
+      timeoutSeconds: 600
     readiness:
       httpGet:
         path: /readyz
         port: 8080
         scheme: HTTP
+      periodSeconds: 5
+      timeoutSeconds: 600
     startup:
       failureThreshold: 120
       httpGet:
@@ -50,6 +58,7 @@ spec:
         scheme: HTTP
       initialDelaySeconds: 1
       periodSeconds: 1
+      timeoutSeconds: 600
   relatedRefs:
   - for: kubernetes.list-replicas
     kind: Pod
@@ -80,7 +89,7 @@ spec:
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-music.apps.local.20250131.837.40802
+    name: spring-music.apps.local.20250131.926.36315
   - for: kubernetes.delete
     kind: Secret
     name: spring-music-values
@@ -92,6 +101,7 @@ spec:
     keyPath: .data['values.yml']->[yaml].contentVersion
     kind: Secret
     name: spring-music-values
+  replicas: 1
   resources:
     cpu: 300m
     memory: 1Gi
