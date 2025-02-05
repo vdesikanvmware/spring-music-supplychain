@@ -8,18 +8,18 @@ metadata:
   name: spring-music
 spec:
   content:
-    buildTimestamp: "2025-02-05T16:18:54Z"
-    gitCommit: 6b8a4cc5437a89b899168c4f1acb40d59c641812
+    buildTimestamp: "2025-02-05T16:36:26Z"
+    gitCommit: 3dece177b5edef0dd648d798dba7f72d2d5342c2
     gitRef: sc-build
     gitURL: github.com/vdesikanvmware/spring-music.git
-    packageImage: ttl.sh/ci/containerapp-spring-music@sha256:4e77a386d665b3a63d02c4e59e5324d021b0c5f55529692cb0fa848f9b60eb2f
+    packageImage: ttl.sh/ci/containerapp-spring-music@sha256:b9209f0f1d3936f40806f0bb632799df6fa125366fd77c3e7d9e8e123c7a7238
     packageRefName: spring-music.apps.local
-    packageVersion: 20250205.1618.54762
-    summary: git:6b8a4cc @ 2025-02-05T16:18:54Z
-    version: 20250205.1618.54762
+    packageVersion: 20250205.1636.26568
+    summary: git:3dece17 @ 2025-02-05T16:36:26Z
+    version: 20250205.1636.26568
   health:
     maxUnavailableReplicas: 10%
-  image: ttl.sh/ci/containerapp-spring-music:20250205.1618.54762@sha256:15e3e70d46bdf3298bfcf1aa23e2e112b738d70d4213b8d767bdb8e3fede1be8
+  image: ttl.sh/ci/containerapp-spring-music:20250205.1636.26568@sha256:f9bcbc4d0631750f91773d777911c7a22f3dfce60e1bf2afc39647fd3f41f3a7
   nonSecretEnv:
   - name: JAVA_TOOL_OPTIONS
     value: -Dmanagement.endpoint.health.probes.add-additional-paths=true -Dmanagement.endpoints.web.exposure.include=health,info
@@ -80,7 +80,7 @@ spec:
   - apiGroup: data.packaging.carvel.dev
     for: kubernetes.delete
     kind: Package
-    name: spring-music.apps.local.20250205.1618.54762
+    name: spring-music.apps.local.20250205.1636.26568
   - for: kubernetes.delete
     kind: Secret
     name: spring-music-values
